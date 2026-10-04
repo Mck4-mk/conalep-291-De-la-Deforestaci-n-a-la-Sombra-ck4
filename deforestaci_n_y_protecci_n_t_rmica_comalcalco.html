@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deforestación y Protección Térmica en Comalcalco | ODS 15</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bio: {
+                            dark: '#1b4332',
+                            primary: '#2d6a4f',
+                            medium: '#40916c',
+                            light: '#52b788',
+                            soft: '#d8f3dc'
+                        },
+                        grey: {
+                            concrete: '#6c757d',
+                            dark: '#343a40',
+                            light: '#e9ecef'
+                        },
+                        heat: '#e76f51',
+                        heatDark: '#d62828'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-hero {
+            background: linear-gradient(135deg, rgba(27,67,50,0.95) 0%, rgba(52,58,64,0.9) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .heat-glow {
+            box-shadow: 0 0 25px rgba(231, 111, 81, 0.3);
+        }
+        .bio-glow {
+            box-shadow: 0 0 25px rgba(82, 183, 136, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans leading-relaxed selection:bg-bio-light selection:text-bio-dark">
+
+    <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-bio-dark flex items-center justify-center text-white font-bold text-lg">
+                    <i class="fa-solid font-tree text-bio-light"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-bio-dark text-lg block leading-tight">Comalcalco Bioclimático</span>
+                    <span class="text-xs text-slate-500 font-medium">Iniciativa ODS 15 - Agenda 2030</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openQRModal()" class="flex items-center gap-2 bg-bio-primary hover:bg-bio-dark text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span class="hidden sm:inline">Compartir (Cero Papel)</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-28 pb-20 md:pt-36 md:pb-28 gradient-hero text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#52b788_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-bio-soft text-xs font-semibold uppercase tracking-wider mb-6 backdrop-blur-md border border-white/10">
+                <i class="fa-solid fa-earth-americas text-bio-light"></i>
+                ODS 15: Vida de Ecosistemas Terrestres
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Deforestación y Protección Térmica en Comalcalco
+            </h1>
+            
+            <p class="text-xl sm:text-2xl font-light text-slate-200 max-w-3xl mx-auto italic mb-10">
+                "¿Vale la pena cambiar árboles por progreso gris?"
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#comparativa" class="w-full sm:w-auto bg-bio-light text-bio-dark hover:bg-white font-bold px-8 py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2 group">
+                    Explorar Diagnóstico
+                    <i class="fa-solid fa-arrow-down transition-transform group-hover:translate-y-1"></i>
+                </a>
+                <a href="#propuesta" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-2xl backdrop-blur-md border border-white/20 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calculator text-bio-light"></i>
+                    Calculadora de Restitución
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="comparativa" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold text-bio-primary uppercase tracking-widest mb-2">Diagnóstico Territorial</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Transformación del Uso de Suelo en Comalcalco</h3>
+            <p class="mt-4 text-slate-600 text-lg">
+                Comparativa estadística del impacto del concreto sobre la sombra natural y el hábitat del mono saraguato (<em>Alouatta palliata</em>).
+            </p>
+        </div>
+
+        <!-- Toggle selector for Time Period -->
+        <div class="flex justify-center mb-12">
+            <div class="bg-slate-200 p-1.5 rounded-2xl flex items-center gap-2 shadow-inner">
+                <button id="btn-past" onclick="setEra('past')" class="px-6 py-3 rounded-xl font-bold text-sm transition-all bg-bio-dark text-white shadow-md">
+                    <i class="fa-solid fa-clock-rotate-left mr-2"></i> Hace 20 Años (Año 2000)
+                </button>
+                <button id="btn-present" onclick="setEra('present')" class="px-6 py-3 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-city mr-2"></i> Situación Actual (Hoy)
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Dynamic Display Grid -->
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 space-y-6">
+                <div id="info-card" class="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl transition-all">
+                    <div id="era-badge" class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 bg-bio-soft text-bio-dark">
+                        Año 2000
+                    </div>
+                    <h4 id="era-title" class="text-2xl font-bold text-slate-900 mb-3">Entorno Verde Equilibrio Natural</h4>
+                    <p id="era-desc" class="text-slate-600 mb-6">
+                        Predominaban los cacaotales y la selva. El microclima fresco regulaba las temperaturas locales y permitía el libre tránsito del mono saraguato por copas de árboles continuas.
+                    </p>
+
+                    <!-- Key Indicators -->
+                    <div class="space-y-4 border-t border-slate-100 pt-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-500 flex items-center gap-2">
+                                <i class="fa-solid fa-tree text-bio-primary"></i> Cobertura Arbolada:
+                            </span>
+                            <span id="metric-trees" class="font-bold text-lg text-bio-dark">65%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-500 flex items-center gap-2">
+                                <i class="fa-solid fa-building text-grey-concrete"></i> Concreto y Asfalto:
+                            </span>
+                            <span id="metric-concrete" class="font-bold text-lg text-slate-700">15%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-semibold text-slate-500 flex items-center gap-2">
+                                <i class="fa-solid fa-temperature-three-quarters text-heat"></i> Sensación Térmica:
+                            </span>
+                            <span id="metric-temp" class="font-bold text-lg text-emerald-600">Agradable / Fresca</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Chart Display -->
+            <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-xl flex flex-col items-center justify-center min-h-[380px]">
+                <div class="w-full max-w-md h-[300px] relative">
+                    <canvas id="landChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-bio-light uppercase tracking-widest mb-2">Autocrítica Social</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Preguntas para Despertar la Conciencia</h3>
+                <p class="mt-4 text-slate-400">
+                    Hagamos una pausa antes de seguir culpando a otros. ¿Qué papel jugamos en la aceptación del deterioro ambiental diario?
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-slate-800/80 p-8 rounded-3xl border border-slate-700 hover:border-bio-light/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-heat/20 text-heat flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-white">¿Aceptamos el calor como inevitable?</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            "¿En qué momento nos acostumbramos a que el calor sofocante en las aulas e instalaciones sea 'lo normal', en lugar de exigir y construir sombra natural?"
+                        </p>
+                    </div>
+                    <div class="text-xs text-bio-light font-semibold uppercase tracking-wider">
+                        — Reflexión de Salud y Confort
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-800/80 p-8 rounded-3xl border border-slate-700 hover:border-bio-light/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-white">¿Comodidad o Supervivencia?</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            "¿Por qué nos molesta tanto barrer las hojas secas de un árbol en la banqueta, pero soportamos callados temperaturas extremas de más de 40 °C?"
+                        </p>
+                    </div>
+                    <div class="text-xs text-bio-light font-semibold uppercase tracking-wider">
+                        — La Paradoja de la Limpieza
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-800/80 p-8 rounded-3xl border border-slate-700 hover:border-bio-light/50 transition-all group flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-bio-light/20 text-bio-light flex items-center justify-center text-xl mb-6 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4 text-white">¿Escuelas u Hornos de Concreto?</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                            "¿Estamos diseñando espacios educativos y comunitarios centrados en el bienestar humano, o planchas de cemento que retienen el calor radiante?"
+                        </p>
+                    </div>
+                    <div class="text-xs text-bio-light font-semibold uppercase tracking-wider">
+                        — Infraestructura y Desarrollo
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="propuesta" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold text-bio-primary uppercase tracking-widest mb-2">Compromiso de Restitución</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Mi Propuesta: La Regla del 1 x 3</h3>
+            <p class="mt-4 text-slate-600 text-lg">
+                Superemos el discurso pasivo. Si por alguna necesidad real se retira un árbol maduro, se debe garantizar la siembra y cuidado de al menos 3 especies nativas.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-start">
+            <!-- Left Explanatory Pillar -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-bio-dark text-white p-8 rounded-3xl shadow-xl">
+                    <h4 class="text-2xl font-bold mb-4 flex items-center gap-3">
+                        <i class="fa-solid fa-seedling text-bio-light"></i>
+                        Especies Nativas Sugeridas
+                    </h4>
+                    <p class="text-bio-soft text-sm mb-6">
+                        Seleccionadas por su copa ancha, capacidad de sombra, resistencia al clima de Comalcalco y aporte al hábitat local:
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm">
+                            <i class="fa-solid fa-circle-check text-bio-light mt-1"></i>
+                            <div>
+                                <strong class="block text-white">Macuilí (Tabebuia rosea)</strong>
+                                <span class="text-xs text-slate-300">Copa amplia, floración rosada, excelente para sombra bioclimática.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm">
+                            <i class="fa-solid fa-circle-check text-bio-light mt-1"></i>
+                            <div>
+                                <strong class="block text-white">Guayacán (Handroanthus chrysanthus)</strong>
+                                <span class="text-xs text-slate-300">Especie nativa resistente, atrae polinizadores y fauna local.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-white/10 p-3.5 rounded-2xl backdrop-blur-sm">
+                            <i class="fa-solid fa-circle-check text-bio-light mt-1"></i>
+                            <div>
+                                <strong class="block text-white">Roble Nector (Quercus oleoides)</strong>
+                                <span class="text-xs text-slate-300">Proporciona densa vegetación y estabilidad térmica en el suelo.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Interactive Calculator -->
+            <div class="lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
+                <h4 class="text-2xl font-bold text-slate-900 mb-2">Calculadora de Restitución y Sombra</h4>
+                <p class="text-slate-500 text-sm mb-8">Calcula la compensación necesaria para tu espacio o proyecto individual.</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            Árboles maduros retirados o metros de concreto añadidos:
+                        </label>
+                        <div class="flex items-center gap-4">
+                            <input type="number" id="calc-input" value="2" min="1" max="100" class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 font-bold text-lg text-slate-800 focus:outline-none focus:ring-2 focus:ring-bio-primary">
+                            <span class="text-slate-500 font-semibold whitespace-nowrap">Unidades / Árboles</span>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateRestitution()" class="w-full bg-bio-primary hover:bg-bio-dark text-white font-bold py-4 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-calculator"></i>
+                        Calcular Compensación
+                    </button>
+
+                    <!-- Results Output Box -->
+                    <div id="calc-results" class="bg-bio-soft/50 border border-bio-light/30 p-6 rounded-2xl space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-xs text-slate-500 font-bold uppercase block">Árboles a Sembrar (1x3)</span>
+                                <span id="res-trees" class="text-3xl font-extrabold text-bio-dark">6</span>
+                                <span class="text-xs text-bio-primary block mt-1">Especies nativas recomendadas</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                                <span class="text-xs text-slate-500 font-bold uppercase block">Sombra Proyectada</span>
+                                <span id="res-shade" class="text-3xl font-extrabold text-bio-dark">90 m²</span>
+                                <span class="text-xs text-bio-primary block mt-1">En madurez (3-5 años)</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                            <span class="text-xs text-slate-500 font-bold uppercase block">Mitigación Térmica Estimada</span>
+                            <span id="res-temp" class="text-xl font-bold text-emerald-600">Hasta -2.5 °C en microclima directo</span>
+                            <p class="text-xs text-slate-500 mt-1">Suficiente para contrarrestar la radiación directa en aulas o patios contiguos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-bio-dark text-white text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <i class="fa-solid fa-quote-left text-bio-light/20 text-6xl mb-6 block"></i>
+            
+            <h3 class="text-2xl sm:text-4xl font-extrabold mb-8 leading-tight">
+                "No puedo cambiar a un millón de personas, pero sí puedo asumir la responsabilidad de mi propio metro cuadrado."
+            </h3>
+
+            <p class="text-bio-soft text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                El verdadero progreso en Comalcalco no empieza con grandes discursos ni con folletos de papel; empieza cuando decides cuidar tu propia sombra y responsabilizarte del espacio que habitas.
+            </p>
+
+            <!-- Signature Button -->
+            <button id="btn-firm" onclick="signPledge()" class="bg-bio-light hover:bg-white text-bio-dark font-extrabold px-10 py-5 rounded-2xl shadow-2xl transition-all text-lg inline-flex items-center gap-3">
+                <i class="fa-solid fa-pen-nib"></i>
+                Firmar Mi Compromiso Individual
+            </button>
+
+            <div id="pledge-confirmation" class="hidden mt-8 p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-md max-w-md mx-auto">
+                <i class="fa-solid fa-circle-check text-bio-light text-3xl mb-2 block"></i>
+                <h4 class="font-bold text-white text-lg">¡Compromiso Registrado!</h4>
+                <p class="text-sm text-bio-soft mt-1">Has asumido la responsabilidad de proteger la sombra de tu propio espacio.</p>
+                <div class="mt-4 text-xs bg-white/20 py-2 px-4 rounded-xl text-white font-mono inline-block">
+                    Firma digital #<span id="pledge-count">128</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-500 py-10 border-t border-slate-800 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="mb-2">Proyecto Escolar: Deforestación y Protección Térmica en Comalcalco, Tabasco.</p>
+            <p class="text-xs text-slate-600">Alineado con el Objetivo de Desarrollo Sostenible (ODS 15) de la Agenda 2030.</p>
+        </div>
+    </footer>
+
+    <div id="qr-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white p-8 rounded-3xl max-w-sm w-full text-center relative shadow-2xl">
+            <button onclick="closeQRModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="w-12 h-12 rounded-2xl bg-bio-soft text-bio-dark flex items-center justify-center text-xl mx-auto mb-4">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            
+            <h4 class="text-xl font-bold text-slate-900 mb-2">Estrategia Cero Papel</h4>
+            <p class="text-xs text-slate-500 mb-6">Escanea este código QR para llevar y compartir la propuesta digitalmente sin imprimir una sola hoja.</p>
+
+            <div class="flex justify-center mb-6 p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                <div id="qrcode"></div>
+            </div>
+
+            <button onclick="closeQRModal()" class="w-full bg-bio-dark text-white font-bold py-3 rounded-xl hover:bg-bio-primary transition-all text-sm">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Chart Initialization ---
+        let landChart;
+        const eraData = {
+            past: {
+                title: "Entorno Verde y Equilibrio Natural",
+                desc: "Predominaban los cacaotales y la selva. El microclima fresco regulaba las temperaturas locales y permitía el libre tránsito del mono saraguato por copas de árboles continuas.",
+                badge: "Año 2000",
+                badgeClass: "bg-bio-soft text-bio-dark",
+                trees: "65%",
+                concrete: "15%",
+                temp: "Agradable / Fresca",
+                tempClass: "text-emerald-600",
+                dataset: [65, 15, 20]
+            },
+            present: {
+                title: "Isla de Calor e Infraestructura Gris",
+                desc: "Aumento desmedido de pavimentos y construcciones. Pérdida del 30% de la masa arbolada, incrementando la sensación térmica en +7 °C y destruyendo corredores biológicos.",
+                badge: "Situación Actual",
+                badgeClass: "bg-heat/20 text-heatDark",
+                trees: "35%",
+                concrete: "40%",
+                temp: "Elevada (+7°C Isla de Calor)",
+                tempClass: "text-heatDark",
+                dataset: [35, 40, 25]
+            }
+        };
+
+        window.onload = function() {
+            const ctx = document.getElementById('landChart').getContext('2d');
+            landChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Árboles y Vegetación', 'Concreto y Asfalto', 'Suelo Despejado/Pastizal'],
+                    datasets: [{
+                        data: [65, 15, 20],
+                        backgroundColor: ['#2d6a4f', '#6c757d', '#d97706'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: 'Inter', size: 12, weight: '600' },
+                                padding: 20
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Initialize QR Code Generator
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 180,
+                height: 180,
+                colorDark : "#1b4332",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            calculateRestitution();
+        };
+
+        // --- Era Switcher Functionality ---
+        function setEra(era) {
+            const data = eraData[era];
+            const btnPast = document.getElementById('btn-past');
+            const btnPresent = document.getElementById('btn-present');
+
+            if (era === 'past') {
+                btnPast.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all bg-bio-dark text-white shadow-md";
+                btnPresent.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900";
+            } else {
+                btnPresent.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all bg-bio-dark text-white shadow-md";
+                btnPast.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all text-slate-600 hover:text-slate-900";
+            }
+
+            // Update Info Card
+            document.getElementById('era-badge').innerText = data.badge;
+            document.getElementById('era-badge').className = `inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4 ${data.badgeClass}`;
+            document.getElementById('era-title').innerText = data.title;
+            document.getElementById('era-desc').innerText = data.desc;
+            document.getElementById('metric-trees').innerText = data.trees;
+            document.getElementById('metric-concrete').innerText = data.concrete;
+            document.getElementById('metric-temp').innerText = data.temp;
+            document.getElementById('metric-temp').className = `font-bold text-lg ${data.tempClass}`;
+
+            // Update Chart
+            landChart.data.datasets[0].data = data.dataset;
+            landChart.update();
+        }
+
+        // --- Calculator Functionality ---
+        function calculateRestitution() {
+            const val = parseInt(document.getElementById('calc-input').value) || 1;
+            const treesToPlant = val * 3;
+            const shadeM2 = treesToPlant * 15; // 15 m2 avg shade per native tree
+            const tempReduction = (treesToPlant * 0.4).toFixed(1);
+
+            document.getElementById('res-trees').innerText = treesToPlant;
+            document.getElementById('res-shade').innerText = `${shadeM2} m²`;
+            document.getElementById('res-temp').innerText = `Hasta -${tempReduction} °C en microclima directo`;
+        }
+
+        // --- Pledge Signature Functionality ---
+        function signPledge() {
+            const btn = document.getElementById('btn-firm');
+            const confirmBox = document.getElementById('pledge-confirmation');
+            const count = document.getElementById('pledge-count');
+
+            btn.classList.add('hidden');
+            confirmBox.classList.remove('hidden');
+            count.innerText = Math.floor(Math.random() * 50) + 150;
+        }
+
+        // --- Modal QR Functions ---
+        function openQRModal() {
+            document.getElementById('qr-modal').classList.remove('hidden');
+        }
+
+        function closeQRModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
